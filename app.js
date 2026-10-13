@@ -31,18 +31,19 @@ const restBtnElement = document.querySelector("#reset-button");
 const plyModeBtnElement = document.querySelector("#player-mode");
 
 /*-------------------------------- Functions --------------------------------*/
-
+  msgElement.innerHTML = 'X\'s Turn'
 function displayXO(event) {
   if (gameOver || event.target.textContent !== "") return;
-
   if (isX) {
-    event.target.textContent = "x";
-    board[Number(event.target.id)] = "x";
+    msgElement.innerHTML = 'O\'s Turn'
+    event.target.textContent = "X";
+    board[Number(event.target.id)] = "X";
     usrPos = Number(event.target.id);
     isX = false;
   } else {
-    event.target.textContent = "o";
-    board[Number(event.target.id)] = "o";
+    msgElement.innerHTML = 'X\'s Turn'
+    event.target.textContent = "O";
+    board[Number(event.target.id)] = "O";
     isX = true;
   }
 
@@ -51,7 +52,7 @@ function displayXO(event) {
 }
 
 function winnerTakesItAll(event) {
-  check = isX ? "o" : "x";
+  check = isX ? "O" : "X";
 
   winner = [...winningCombos].some(combo =>
     combo.every(index => board[index] === check)
@@ -76,13 +77,12 @@ function reset() {
   sqrElement.forEach(square => {
     square.textContent = "";
   });
-
   board = new Array(9).fill(null);
   rounds = 0;
   isX = true;
   usrPos = null;
   gameOver = false;
-  msgElement.textContent = "";
+  msgElement.textContent = "X\'s Turn";
 }
 
 function Mode() {
